@@ -1,4 +1,4 @@
-package oip;
+package api;
 
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
@@ -41,6 +41,7 @@ public class Receiver {
 		          System.out.println(" Receiver received: " + message + " !");
 		        }
 		      };
+		      
 		      channel.basicConsume(Queue_name, true, consumer);
 		    
 		}catch(Exception e){
