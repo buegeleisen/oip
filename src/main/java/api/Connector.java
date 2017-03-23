@@ -2,13 +2,10 @@ package api;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
 
-//import org.json.*;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
 
 import com.rabbitmq.client.Channel;
 
@@ -44,6 +41,7 @@ public class Connector {
 		
 		
 	}
+	
 	public JSONObject makejson() throws Exception{
 		Object obj=parser.parse(new FileReader("C:/Users/migue/Documents/dev/oip/json_example.txt"));
 		JSONObject jsonObject = (JSONObject) obj;

@@ -8,10 +8,8 @@ public class Candidate extends Vector<Double> {
 		this.dimension = dimension;
 	}
 	
-	
 	private int dimension;
-	
-	
+		
 	@Override
 	public synchronized void addElement(Double obj) {
 		if(this.size() == dimension){
