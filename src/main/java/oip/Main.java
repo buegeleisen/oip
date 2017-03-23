@@ -2,6 +2,9 @@ package oip;
 
 import javax.swing.JOptionPane;
 
+import api.Connector;
+import api.Receiver;
+
 public class Main {
 
 	public static void main(String[] args) {

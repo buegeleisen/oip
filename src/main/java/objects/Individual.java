@@ -1,4 +1,4 @@
-package oip;
+package objects;
 
 import java.util.Vector;
 
@@ -7,7 +7,7 @@ public class Individual {
 	
 	
 	String solutionCandidateId;
-	Vector<Double> solutionVector=new Vector<Double>();
+	Vector<Double> solutionVector;
 	double resultValue;
 	boolean isFeasable;
 	boolean isEvaluated;
