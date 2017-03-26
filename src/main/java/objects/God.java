@@ -129,14 +129,14 @@ public class God {
 		mutatedPopulation.addAll(population);
 		
 		for(int i = 0; i < mutation; i++){
-			int mutantNr =  (int) Math.round(mutatedPopulation.size() * Math.random());
+			int mutantNr =  (int) (mutatedPopulation.size() * Math.random());
 			
 			Individual mutant = (Individual) mutatedPopulation.elementAt(mutantNr).clone();
 			
 			int mutantValueCount = (int) Math.round(dimension * Math.random());
 			
 			for(int j = 0; j < mutantValueCount; j++){
-				int mutantValue = (int) Math.round(dimension * Math.random());
+				int mutantValue = (int) (dimension * Math.random());
 				
 				mutant.getSolutionVector()[mutantValue] =  (rangeMin+(rangeMax-rangeMin)*Math.random());
 				
@@ -153,15 +153,26 @@ public class God {
 	 * @param fittedPopulation
 	 * @return
 	 */
-	private Vector<Individual> getMasterRace(Vector<Individual> fittedPopulation){
+	public Vector<Individual> getMasterRace(Vector<Individual> fittedPopulation){
 		Collections.sort(fittedPopulation);
 		Vector<Individual> masterRace = new Vector<Individual>();
 		
 		for (int i = 0; i < survivor; i++){
-			masterRace.add(fittedPopulation.elementAt(i));
+			masterRace.addElement((fittedPopulation.elementAt(i)));
 		}
 		
 		return masterRace;
+	}
+	
+	public void print(Vector<Individual> population) {
+		for (int i = 0; i < population.size(); i++){
+			System.out.println("Element " + i);
+			for(int j = 0; j < dimension; j++){
+				System.out.println("Element at " + i + " with value " + j + " as " + population.elementAt(i).getSolutionVector()[j]);
+			}
+			System.out.println("Result of Element " + i + " : " +  population.elementAt(i).getResultValue());
+					}
+		System.out.println(" ");
 	}
 	
 	public Vector<Individual> getPopulation() {
