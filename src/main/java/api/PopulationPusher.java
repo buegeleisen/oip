@@ -3,6 +3,9 @@ package api;
 import com.rabbitmq.client.ConnectionFactory;
 import objects.Individual;
 import com.rabbitmq.client.Connection;
+
+import java.util.Vector;
+
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 
@@ -18,6 +21,12 @@ public class PopulationPusher {
 	public PopulationPusher(String host, String queueName){
 		this.host = host;
 		this.queueName = queueName;
+	}
+	
+	public void sendAllIndividuals(Vector<Individual> population){
+		for (int i = 0; i < population.size(); i++){
+			sendIndividual(population.elementAt(i));
+		}
 	}
 		
 	public void sendIndividual(Individual individual){
@@ -40,9 +49,7 @@ public class PopulationPusher {
 		catch (Exception e) {
             System.out.println("Caught: " + e);
             e.printStackTrace();
-		}
-		
-		
+		}	
 	}
 		
 	private String makejson(Individual individual){

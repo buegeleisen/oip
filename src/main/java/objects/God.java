@@ -21,11 +21,12 @@ public class God {
 	 * @param survivor Value of the survivors
 	 * @param dimension Size of dimensions of the Individuals
 	 */
-	public God(int rangeMin, int rangeMax, int populationCount, int survivor, int dimension){
+	public God(int rangeMin, int rangeMax, int populationCount, int survivor, int mutation, int dimension){
 		this.populationCount = populationCount;
 		this.survivor = survivor;
 		this.rangeMin = rangeMin;
 		this.rangeMax = rangeMax;
+		this.mutation = mutation;
 		this.dimension = dimension;
 	}
 	
@@ -78,7 +79,7 @@ public class God {
 		Vector<Individual> evolvedPopulation = new Vector<Individual>();
 		
 		try {
-			evolvedPopulation = mutatePopulation(crossoverPopulation(getMasterRace(fittedPopulation)));
+			evolvedPopulation = mutatePopulation( crossoverPopulation( scatter( getMasterRace(fittedPopulation))));
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,7 +93,7 @@ public class God {
 	 * @param population The Population who gets children and builds an new Generation
 	 * @return a new Generation
 	 */
-	private Vector<Individual> crossoverPopulation(Vector<Individual> population){
+	public Vector<Individual> crossoverPopulation(Vector<Individual> population){
 		Vector<Individual> newPopulation = new Vector<Individual>();
 		
 		for (int i = 0; i < population.size(); i ++){
@@ -101,10 +102,18 @@ public class God {
 				Individual b = population.elementAt(j);
 				Double[] newArray = new Double[dimension];
 				for (int k = 0; k < dimension; k ++){
+					
 					Double valueA = a.getSolutionVector()[k];
 					Double valueB = b.getSolutionVector()[k];
 					
-					Double newValue = valueA * 0.5 + valueB * 0.5;
+					Double newValue;
+					if(a.getResultValue() > b.getResultValue()){
+						newValue = valueA * 0.8 + valueB * 0.2;
+					}
+					else{
+						newValue = valueA * 0.2 + valueB * 0.8;
+					}
+					
 					
 					newArray[k] = newValue;
 				}
@@ -124,7 +133,7 @@ public class God {
 	 * @return 
 	 * @throws CloneNotSupportedException 
 	 */
-	private Vector<Individual> mutatePopulation(Vector<Individual> population) throws CloneNotSupportedException{
+	public Vector<Individual> mutatePopulation(Vector<Individual> population) throws CloneNotSupportedException{
 		Vector<Individual> mutatedPopulation = new Vector<Individual>();
 		mutatedPopulation.addAll(population);
 		
@@ -133,7 +142,7 @@ public class God {
 			
 			Individual mutant = (Individual) mutatedPopulation.elementAt(mutantNr).clone();
 			
-			int mutantValueCount = (int) Math.round(dimension * Math.random());
+			int mutantValueCount = (int) (dimension * Math.random());
 			
 			for(int j = 0; j < mutantValueCount; j++){
 				int mutantValue = (int) (dimension * Math.random());
@@ -164,6 +173,48 @@ public class God {
 		return masterRace;
 	}
 	
+	/***
+	 * 
+	 * @param population
+	 * @return
+	 */
+	public Vector<Individual> scatter(Vector<Individual> population){
+		Vector<Individual> scatteredPopulation = new Vector<Individual>();
+		
+		for(int i = 0; i < population.size(); i++){
+			Individual individual = population.elementAt(i);
+			
+			int scatterValueCount = (int) (dimension * Math.random());
+			
+			for (int j = 0; j < scatterValueCount; j ++){
+				
+				int scatterValue = (int) (dimension * Math.random());
+				
+				int positive = (int) (2 * Math.random());
+				
+				Double step = Math.random();
+				
+				if (positive == 1){
+					individual.getSolutionVector()[scatterValue] = individual.getSolutionVector()[scatterValue] + step;
+				}else {
+					individual.getSolutionVector()[scatterValue] = individual.getSolutionVector()[scatterValue] - step;
+				}
+				 
+				
+			}
+			
+			scatteredPopulation.addElement(individual);
+		}
+		
+		scatteredPopulation.addAll(population);
+		
+		return scatteredPopulation;
+	}
+	
+	/***
+	 * 
+	 * @param population
+	 */
 	public void print(Vector<Individual> population) {
 		for (int i = 0; i < population.size(); i++){
 			System.out.println("Element " + i);

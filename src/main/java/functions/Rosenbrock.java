@@ -5,7 +5,7 @@ public class Rosenbrock {
 	private int b = 100;
 	
 	public Rosenbrock() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	public Rosenbrock(int a, int b) {
