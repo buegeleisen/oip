@@ -41,7 +41,7 @@ public class PopulationPusher {
 		    String message = makejson(individual);
 		    
 		    channel.basicPublish("", queueName, null, message.getBytes());
-		    System.out.println(" Connector has sent: "+message+" ! (nice)");
+		    //System.out.println(" Connector has sent: "+message+" ! (nice)");
 		    
 		    channel.close();
 		    connection.close();

@@ -49,7 +49,7 @@ public class PopulationReceiver {
 		          
 		          fittedPopulation.addElement(individual);
 		          
-		          System.out.println(" Receiver received: " + message + " !");
+		          //System.out.println(" Receiver received: " + message + " !");
 		        }
 		      };
 		      
@@ -58,5 +58,13 @@ public class PopulationReceiver {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+
+	public Vector<Individual> getFittedPopulation() {
+		return fittedPopulation;
+	}
+
+	public void setFittedPopulation(Vector<Individual> fittedPopulation) {
+		this.fittedPopulation = fittedPopulation;
 	}
 }
