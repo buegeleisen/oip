@@ -89,6 +89,27 @@ public class God {
 	}
 	
 	/***
+	 * Evolves without scattering
+	 * 
+	 * @param fittedPopulation
+	 * @return
+	 */
+	public Vector<Individual> evolvePopulationWithoutScatter(Vector<Individual> fittedPopulation){
+		Vector<Individual> evolvedPopulation = new Vector<Individual>();
+		
+		try {
+			evolvedPopulation = mutatePopulation( crossoverPopulation( getMasterRace(fittedPopulation)));
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return evolvedPopulation;
+	}
+	
+	
+	
+	/***
 	 * 
 	 * @param population The Population who gets children and builds an new Generation
 	 * @return a new Generation

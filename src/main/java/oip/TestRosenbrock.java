@@ -6,7 +6,7 @@ import objects.God;
 import objects.Individual;
 
 public class TestRosenbrock {
-	private static God g = new God(-1000, 1000, 500000, 30, 450, 2);
+	private static God g = new God(-1000, 1000, 50000, 30, 450, 2);
 	
 	public static void main(String[] args) {
 		
@@ -31,7 +31,7 @@ public class TestRosenbrock {
 		int i = 0;
 		
 		while (masterRace.elementAt(0).getResultValue() > 0.01){
-			if (i == 5000) break;
+			if (i == 500) break;
 			System.out.println("Generation " + i);
 			
 			population = sendToRosenbrock(population);

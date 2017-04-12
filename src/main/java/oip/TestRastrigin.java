@@ -29,7 +29,8 @@ private static God g = new God(-100, 100, 10000, 30, 450, 2);
 		
 		int i = 0;
 		
-		while (masterRace.elementAt(0).getResultValue() > 0.001){
+		//while (masterRace.elementAt(0).getResultValue() > 0.0001){
+		while(i < 10){
 			
 			System.out.println("Generation " + i);
 			
@@ -51,7 +52,7 @@ private static God g = new God(-100, 100, 10000, 30, 450, 2);
 	
 	private static Vector<Individual> sendToRastrigin(Vector<Individual> pop){
 		Vector<Individual> fittedPopulation = new Vector<Individual>();
-		Rastrigin r = new Rastrigin();
+		Rastrigin r = new Rastrigin(100);
 		
 		for (int i = 0; i < pop.size(); i++){
 			Individual individual = pop.elementAt(i);

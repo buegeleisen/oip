@@ -7,7 +7,7 @@ import objects.God;
 import objects.Individual;
 
 public class TestEggholder {
-private static God g = new God(-512, 512, 100000, 30, 1000, 2);
+private static God g = new God(-513, 513, 100000, 30, 1000, 2);
 	
 	public static void main(String[] args) {
 		
