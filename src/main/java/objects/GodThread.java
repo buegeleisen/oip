@@ -1,11 +1,9 @@
-package oip;
+package objects;
 
 import java.util.Vector;
 
 import api.PopulationPusher;
 import api.PopulationReceiver;
-import objects.God;
-import objects.Individual;
 
 public class GodThread extends Thread {
 	private God g;
