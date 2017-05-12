@@ -39,8 +39,8 @@ Bester Vektor:
           -2.9519591744797253,
           -2.4928637358709436
     ],
-    "resultValue": 0.0,
-    "isFeasible": false,
-    "isEvaluated": false
+    "resultValue": -579.2352715521621,
+    "isFeasible": true,
+    "isEvaluated": true
 }
 ```
