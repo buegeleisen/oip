@@ -2,6 +2,7 @@ package oip;
 
 import javax.swing.JOptionPane;
 import objects.God;
+import objects.GodThread;
 
 public class Main {
 
