@@ -1,4 +1,4 @@
-package oip;
+package tests;
 
 import java.util.Vector;
 import functions.Sphere;

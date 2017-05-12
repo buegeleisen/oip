@@ -1,26 +1,25 @@
-package oip;
+package tests;
 
 import java.util.Vector;
-import functions.Rosenbrock;
+
+import functions.Rastrigin;
 import objects.God;
 import objects.Individual;
 
-public class TestRosenbrock {
-	private static God g = new God(-1000, 1000, 50000, 30, 450, 2);
+public class TestRastrigin {
+private static God g = new God(-100, 100, 10000, 30, 450, 2);
 	
 	public static void main(String[] args) {
 		
-		
 		Vector<Individual> population = new Vector<Individual>();
-		
+
 		g.init();
 		
 		population = g.getPopulation();
 		
-		
 		Vector<Individual>  masterRace = new Vector<Individual>();
 		
-		population = sendToRosenbrock(population);
+		population = sendToRastrigin(population);
 		
 		masterRace = g.getMasterRace(population);
 		
@@ -30,11 +29,12 @@ public class TestRosenbrock {
 		
 		int i = 0;
 		
-		while (masterRace.elementAt(0).getResultValue() > 0.01){
-			if (i == 500) break;
+		//while (masterRace.elementAt(0).getResultValue() > 0.0001){
+		while(i < 10){
+			
 			System.out.println("Generation " + i);
 			
-			population = sendToRosenbrock(population);
+			population = sendToRastrigin(population);
 			
 			masterRace = g.getMasterRace(population);
 			
@@ -45,17 +45,14 @@ public class TestRosenbrock {
 			i++;
 		}
 		
-		
-		
-		
 		System.out.println("Done after Generation " + i);
 		
 	}
 	
 	
-	private static Vector<Individual> sendToRosenbrock(Vector<Individual> pop){
+	private static Vector<Individual> sendToRastrigin(Vector<Individual> pop){
 		Vector<Individual> fittedPopulation = new Vector<Individual>();
-		Rosenbrock r = new Rosenbrock();
+		Rastrigin r = new Rastrigin(100);
 		
 		for (int i = 0; i < pop.size(); i++){
 			Individual individual = pop.elementAt(i);
@@ -70,6 +67,4 @@ public class TestRosenbrock {
 		
 		return fittedPopulation;
 	}
-	
-	
 }

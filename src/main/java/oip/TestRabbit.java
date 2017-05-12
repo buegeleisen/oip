@@ -8,9 +8,9 @@ import objects.God;
 import objects.Individual;
 
 public class TestRabbit {
-	private static God g = new God(-100, 100, 10000, 30, 450, 17);
 	
 	public static void main(String[] args) {
+		God g = new God(-30, 30, 10000, 30, 300, 17);
 		
 		Vector<Individual> population = new Vector<Individual>();
 
@@ -22,15 +22,15 @@ public class TestRabbit {
 		
 		population= sendToRabbit(population);
 		
-		masterRace= g.getMasterRace(population);
+		masterRace = g.getMasterRace(population);
 		
 		g.print(masterRace);
 		
 		population= g.evolvePopulation(population);
 		
-		int i = 0;
+		int i = 1;
 		
-		while(masterRace.elementAt(0).getResultValue() > 0){
+		while(masterRace.elementAt(0).getResultValue() > -1000){
 			
 			System.out.println("Generation " + i);
 			
@@ -38,7 +38,10 @@ public class TestRabbit {
 			
 			masterRace=g.getMasterRace(population);
 			
-			g.print(masterRace);
+			//g.print(masterRace);
+			g.printBest(masterRace);
+			
+			System.out.println(masterRace.elementAt(0).isFeasable());
 			
 			population= g.evolvePopulation(population);
 			
@@ -49,13 +52,13 @@ public class TestRabbit {
 	
 	private static Vector<Individual> sendToRabbit(Vector<Individual> pop){
 		Vector<Individual> fittedPopulation= new Vector<Individual>();
-		PopulationPusher pp= new PopulationPusher("localhost", "Inbound");
-		PopulationReceiver pr=new PopulationReceiver("localhost");
+		PopulationPusher pp= new PopulationPusher("192.168.99.100", "Inbound");
+		PopulationReceiver pr=new PopulationReceiver("192.168.99.100");
 		pr.receivePopulation();
 		
 		pp.sendAllIndividuals(pop);
 		
-		fittedPopulation=pr.getFittedPopulation();
+		fittedPopulation = pr.getFittedPopulation();
 		
 		return fittedPopulation;
 	}

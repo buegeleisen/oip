@@ -79,7 +79,7 @@ public class God {
 		Vector<Individual> evolvedPopulation = new Vector<Individual>();
 		
 		try {
-			evolvedPopulation = mutatePopulation( crossoverPopulation( scatter( getMasterRace(fittedPopulation))));
+			evolvedPopulation = mutatePopulation( crossoverPopulation( scatter( getMasterRace( fittedPopulation))));
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -245,6 +245,24 @@ public class God {
 			System.out.println("Result of Element " + i + " : " +  population.elementAt(i).getResultValue());
 					}
 		System.out.println(" ");
+	}
+	
+	public Vector<Individual> sort(Vector<Individual> population){
+		Vector<Individual> sortedPopulation = new Vector<Individual>(); 
+		for(int i = 0; i<population.size(); i++){
+			Individual individual = population.elementAt(i);
+			if(individual.isFeasable()==true){
+				sortedPopulation.add(individual);
+			}
+		}
+		return sortedPopulation;
+	}
+	
+	public void printBest(Vector<Individual> population){
+		for(int j = 0; j < dimension; j++){
+			System.out.println("Dimension " + j + " with value: " + population.elementAt(0).getSolutionVector()[j]);
+		}
+		System.out.println("Result of Best Element: " +  population.elementAt(0).getResultValue());
 	}
 	
 	public Vector<Individual> getPopulation() {

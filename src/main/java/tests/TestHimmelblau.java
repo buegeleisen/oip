@@ -1,25 +1,24 @@
-package oip;
+package tests;
 
 import java.util.Vector;
-
-import functions.Easom;
+import functions.Himmelblau;
 import objects.God;
 import objects.Individual;
 
-public class TestEasom {
+public class TestHimmelblau {
 private static God g = new God(-100, 100, 10000, 30, 450, 2);
 	
 	public static void main(String[] args) {
 		
 		Vector<Individual> population = new Vector<Individual>();
-
+		
 		g.init();
 		
 		population = g.getPopulation();
 		
 		Vector<Individual>  masterRace = new Vector<Individual>();
 		
-		population = sendToEasom(population);
+		population = sendToHimmelblau(population);
 		
 		masterRace = g.getMasterRace(population);
 		
@@ -29,11 +28,11 @@ private static God g = new God(-100, 100, 10000, 30, 450, 2);
 		
 		int i = 0;
 		
-		while (masterRace.elementAt(0).getResultValue() > -0.9999999){
+		while (masterRace.elementAt(0).getResultValue() > 0.01){
 			
 			System.out.println("Generation " + i);
 			
-			population = sendToEasom(population);
+			population = sendToHimmelblau(population);
 			
 			masterRace = g.getMasterRace(population);
 			
@@ -44,19 +43,22 @@ private static God g = new God(-100, 100, 10000, 30, 450, 2);
 			i++;
 		}
 		
+		
+		
+		
 		System.out.println("Done after Generation " + i);
 		
 	}
 	
 	
-	private static Vector<Individual> sendToEasom(Vector<Individual> pop){
+	private static Vector<Individual> sendToHimmelblau(Vector<Individual> pop){
 		Vector<Individual> fittedPopulation = new Vector<Individual>();
-		Easom e = new Easom();
+		Himmelblau h = new Himmelblau();
 		
 		for (int i = 0; i < pop.size(); i++){
 			Individual individual = pop.elementAt(i);
 			
-			Double result = e.compute(individual.getSolutionVector()[0], individual.getSolutionVector()[1]);
+			Double result = h.compute(individual.getSolutionVector()[0], individual.getSolutionVector()[1]);
 			
 			individual.setResultValue(result);
 			

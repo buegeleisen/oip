@@ -15,14 +15,26 @@ import com.rabbitmq.client.Envelope;
 import objects.Individual;
 
 public class PopulationReceiver {
-	private String Queue_name="Outbound";
-	private String Exchange_name="results";
+	private String queueName="Outbound";
+	private String exchangeName="results";
 	private String host;
+	private String key = "test";
 	private Gson gson = new Gson();
 	Vector<Individual> fittedPopulation = new Vector<Individual>();
 	
 	public PopulationReceiver(String host){
 		this.host=host;
+	}
+	
+	public PopulationReceiver(String host, String queueName) {
+		this.host = host;
+		this.queueName = queueName;
+	}
+	
+	public PopulationReceiver(String host, String queueName, String key) {
+		this.host = host;
+		this.key = key;
+		this.queueName = queueName;
 	}
 	
 	public void receivePopulation(){
@@ -33,9 +45,9 @@ public class PopulationReceiver {
 		    Connection connection = factory.newConnection();
 		    Channel channel = connection.createChannel();
 
-		    channel.queueDeclare(Queue_name, true, false, false, null);
-		    channel.exchangeDeclare(Exchange_name,"fanout",false);
-		    channel.queueBind(Queue_name, Exchange_name, "test");
+		    channel.queueDeclare(queueName, true, false, false, null);
+		    channel.exchangeDeclare(exchangeName,"fanout",false);
+		    channel.queueBind(queueName, exchangeName, key);
 		    
 		    System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 		    
@@ -53,7 +65,7 @@ public class PopulationReceiver {
 		        }
 		      };
 		      
-		      channel.basicConsume(Queue_name, true, consumer);
+		      channel.basicConsume(queueName, true, consumer);
 		    
 		}catch(Exception e){
 			e.printStackTrace();
