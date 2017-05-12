@@ -4,6 +4,7 @@ import com.rabbitmq.client.ConnectionFactory;
 import objects.Individual;
 import com.rabbitmq.client.Connection;
 
+import java.util.UUID;
 import java.util.Vector;
 
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ public class PopulationPusher {
 		
 	public void sendIndividual(Individual individual){
 		try{
+			individual.setSolutionCandidateId(UUID.randomUUID().toString());
 			ConnectionFactory factory = new ConnectionFactory();
 		    factory.setHost(host);
 		    Connection connection = factory.newConnection();

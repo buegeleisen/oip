@@ -5,17 +5,17 @@ public class Individual implements Comparable<Individual>, Cloneable {
 	private String solutionCandidateId;
 	private Double[] solutionVector;
 	private Double resultValue;
-	private boolean isFeasable;
+	private boolean isFeasible;
 	private boolean isEvaluated;
 	
 
 
 
-	public Individual(String solutionCandidateId, Double[] solutionVector, Double resultValue, boolean isFeasable, boolean isEvaluated){
+	public Individual(String solutionCandidateId, Double[] solutionVector, Double resultValue, boolean isFeasible, boolean isEvaluated){
 		this.solutionCandidateId = solutionCandidateId;
 		this.solutionVector = solutionVector;
 		this.resultValue = resultValue;
-		this.isFeasable = isFeasable;
+		this.isFeasible = isFeasible;
 		this.isEvaluated = isEvaluated;
 	}
 
@@ -76,15 +76,15 @@ public class Individual implements Comparable<Individual>, Cloneable {
 
 
 
-	public boolean isFeasable() {
-		return isFeasable;
+	public boolean isFeasible() {
+		return isFeasible;
 	}
 
 
 
 
-	public void setFeasable(boolean isFeasable) {
-		this.isFeasable = isFeasable;
+	public void setFeasible(boolean isFeasable) {
+		this.isFeasible = isFeasable;
 	}
 
 

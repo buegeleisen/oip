@@ -79,7 +79,7 @@ public class God {
 		Vector<Individual> evolvedPopulation = new Vector<Individual>();
 		
 		try {
-			evolvedPopulation = mutatePopulation( crossoverPopulation( scatter( getMasterRace( fittedPopulation))));
+			evolvedPopulation = mutatePopulation( crossoverPopulation( scatter( getMasterRace( sort(fittedPopulation)))));
 		} catch (CloneNotSupportedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -186,10 +186,16 @@ public class God {
 	public Vector<Individual> getMasterRace(Vector<Individual> fittedPopulation){
 		Collections.sort(fittedPopulation);
 		Vector<Individual> masterRace = new Vector<Individual>();
-		
-		for (int i = 0; i < survivor; i++){
-			masterRace.addElement((fittedPopulation.elementAt(i)));
+		if (fittedPopulation.size() < survivor){
+			for (int i = 0; i < fittedPopulation.size(); i++){
+				masterRace.addElement((fittedPopulation.elementAt(i)));
+			}
+		}else {
+			for (int i = 0; i < survivor; i++){
+				masterRace.addElement((fittedPopulation.elementAt(i)));
+			}
 		}
+		
 		
 		return masterRace;
 	}
@@ -251,7 +257,7 @@ public class God {
 		Vector<Individual> sortedPopulation = new Vector<Individual>(); 
 		for(int i = 0; i<population.size(); i++){
 			Individual individual = population.elementAt(i);
-			if(individual.isFeasable()==true){
+			if(individual.isFeasible()==true){
 				sortedPopulation.add(individual);
 			}
 		}
