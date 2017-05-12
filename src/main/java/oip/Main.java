@@ -8,8 +8,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		//String host=JOptionPane.showInputDialog("Gib IP!(oder localhost du weißt!");
-		String myHost = "192.168.99.100";
+		String host=JOptionPane.showInputDialog("Geben Sie hier ihre Docker IP ein");
+		//String myHost = "192.168.99.100";
 		
 		God g = new God(-4, 4, 200, 10, 200, 17);
 		
@@ -17,12 +17,13 @@ public class Main {
 		 * Theoretisch mit Threads möglich
 		 * Nicht getestet
 		 * Weil nur eine Inbound Queue
+		 * 
 		 */
 		
 		System.out.println("Thread "+ 1 + " started");
 		GodThread godThread = new GodThread(g);
 		godThread.setOutboundName("Outbound");
-		godThread.setHost(myHost);
+		godThread.setHost(host);
 		godThread.setStop(-1000);
 		godThread.start();
 		
